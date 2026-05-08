@@ -208,7 +208,7 @@
 
   <!-- ── BAR RACE ── -->
   <div class="card">
-    <div class="card-title">各學制在學學生數動態競賽排名</div>
+    <div class="card-title">各學制在學學生人數動態圖</div>
 
     <div class="controls">
       <button class="btn btn-play" id="playBtn" onclick="togglePlay()">▶ 播放</button>
@@ -402,10 +402,6 @@ function runRace(){
   if(!playing) return;
   if(raceIdx >= years.length){
     raceIdx = 0;
-    playing = false;
-    document.getElementById('playBtn').textContent = '▶ 播放';
-    document.getElementById('playBtn').className = 'btn btn-play';
-    return;
   }
   setRaceOption(years[raceIdx], raceIdx > 0);
   raceIdx++;
@@ -428,6 +424,15 @@ function updateSpeed(){
 }
 
 setRaceOption(years[0], false);
+
+// 開啟網頁自動播放
+window.addEventListener('load', () => {
+  playing = true;
+  const btn = document.getElementById('playBtn');
+  btn.textContent = '⏸ 暫停';
+  btn.className = 'btn btn-pause';
+  runRace();
+});
 
 // ════════════════════════════════════════════════════════════
 // LINE CHART
